@@ -52,3 +52,6 @@ class BotUserOrder(BotCompany):
         verbose_name = 'BotUserOrder'
         verbose_name_plural = 'BotUserOrders'
 
+
+class rustam(BaseModel):
+    pass
