@@ -4,8 +4,8 @@ from django.utils.translation import gettext_lazy as _
 
 
 class Product(BaseModel):
-    name = models.CharField(max_length=30)
-    description = models.TextField()
+    name = models.CharField(_("name"), max_length=30)
+    description = models.TextField(_("description"))
     image = models.ImageField()
     price = models.DecimalField(max_digits=10, decimal_places=2)
     calcium = models.IntegerField()
