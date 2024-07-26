@@ -1,5 +1,6 @@
 from django.db import models
 from bot.models import BaseModel
+from django.utils.translation import gettext_lazy as _
 
 
 class Product(BaseModel):
@@ -13,8 +14,8 @@ class Product(BaseModel):
     chlorides = models.IntegerField()
 
     class Meta:
-        verbose_name = 'Product'
-        verbose_name_plural = 'Product'
+        verbose_name = _('Product')
+        verbose_name_plural = _('Product')
 
     def __str__(self):
         return self.name
@@ -26,5 +27,3 @@ class CartItem(BaseModel):
 
     def total_price(self):
         return self.quantity * self.product.price
-
-

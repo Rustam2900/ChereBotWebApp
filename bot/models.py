@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 
 
 class BaseModel(models.Model):
@@ -16,8 +17,8 @@ class BotUser(BaseModel):
     add_contact = models.CharField(max_length=30)
 
     class Meta:
-        verbose_name = 'BotUser'
-        verbose_name_plural = 'BotUsers'
+        verbose_name = _('BotUser')
+        verbose_name_plural = _('BotUsers')
 
 
 class BotCompany(BaseModel):
@@ -29,8 +30,8 @@ class BotCompany(BaseModel):
     lifetime = models.IntegerField()
 
     class Meta:
-        verbose_name = 'BotCompany'
-        verbose_name_plural = 'BotCompanies'
+        verbose_name = _('BotCompany')
+        verbose_name_plural = _('BotCompanies')
 
 
 class BotCompanyOrder(BaseModel):
@@ -39,8 +40,8 @@ class BotCompanyOrder(BaseModel):
     quantity = models.IntegerField()
 
     class Meta:
-        verbose_name = 'BotCompanyOrder'
-        verbose_name_plural = 'BotCompanyOrders'
+        verbose_name = _('BotCompanyOrder')
+        verbose_name_plural = _('BotCompanyOrders')
 
 
 class BotUserOrder(BotCompany):
@@ -49,9 +50,5 @@ class BotUserOrder(BotCompany):
     quantity = models.IntegerField()
 
     class Meta:
-        verbose_name = 'BotUserOrder'
-        verbose_name_plural = 'BotUserOrders'
-
-
-class rustam(BaseModel):
-    pass
+        verbose_name = _('BotUserOrder')
+        verbose_name_plural = _('BotUserOrders')
