@@ -42,13 +42,3 @@ class BotCompanyOrder(BaseModel):
     class Meta:
         verbose_name = _('BotCompanyOrder')
         verbose_name_plural = _('BotCompanyOrders')
-
-
-class BotUserOrder(BotCompany):
-    bot_user_id = models.ForeignKey(BotUser, on_delete=models.CASCADE, related_name='order_user')
-    product_name = models.CharField(_("product_name"), max_length=30)
-    quantity = models.IntegerField()
-
-    class Meta:
-        verbose_name = _('BotUserOrder')
-        verbose_name_plural = _('BotUserOrders')

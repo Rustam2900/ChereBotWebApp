@@ -1,6 +1,9 @@
 from django.contrib import admin
-from webapp.models import Product, CartItem
+from webapp.models import Product, CartItem, Shares, MinAmount, Banner
 from modeltranslation.admin import TranslationAdmin
+
+admin.site.register(MinAmount)
+admin.site.register(Banner)
 
 
 @admin.register(Product)
@@ -15,3 +18,9 @@ class CartItemAdmin(admin.ModelAdmin):
     list_display = ('id', 'product', 'quantity', 'total_price')
     search_fields = ('id', 'product', 'quantity')
     list_filter = ('id', 'product', 'quantity', 'total_price')
+
+
+@admin.register(Shares)
+class SharesAdmin(admin.ModelAdmin):
+    list_display = ('id', 'price')
+    search_fields = ('id', )

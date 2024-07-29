@@ -1,6 +1,6 @@
 from django.contrib import admin
 from modeltranslation.admin import TranslationAdmin
-from bot.models import BotUser, BotCompany, BotUserOrder, BotCompanyOrder
+from bot.models import BotUser, BotCompany, BotCompanyOrder
 
 
 @admin.register(BotUser)
@@ -17,11 +17,5 @@ class BotCompanyAdmin(TranslationAdmin):
 
 @admin.register(BotCompanyOrder)
 class BotCompanyOrderAdmin(TranslationAdmin):
-    list_display = ['id', 'product_name', 'quantity', 'total_price', 'create_at']
-    search_fields = ['id', 'product_name']
-
-
-@admin.register(BotUserOrder)
-class BotUserOrderAdmin(TranslationAdmin):
     list_display = ['id', 'product_name', 'quantity', 'total_price', 'create_at']
     search_fields = ['id', 'product_name']
