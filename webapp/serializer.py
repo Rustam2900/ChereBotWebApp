@@ -27,7 +27,10 @@ class CartItemSerializer(serializers.ModelSerializer):
 class SharesSerializer(serializers.ModelSerializer):
     class Meta:
         model = Shares
-        fields = '__all__'
+        fields = ['title', 'description', 'image', 'interest', 'price']
+
+    def create(self, validated_data):
+        return Shares.objects.create(**validated_data)
 
 
 class MinAmountSerializer(serializers.ModelSerializer):

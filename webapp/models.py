@@ -22,8 +22,10 @@ class Product(BaseModel):
 
 
 class CartItem(BaseModel):
-    bot_company_id = models.ForeignKey(BotCompany, on_delete=models.CASCADE, related_name='company_order')
-    bot_user_id = models.ForeignKey(BotUser, on_delete=models.CASCADE, related_name='company_order')
+    bot_company_id = models.ForeignKey(BotCompany, on_delete=models.CASCADE, related_name='company_order', null=True,
+                                       blank=True)
+    bot_user_id = models.ForeignKey(BotUser, on_delete=models.CASCADE, related_name='company_order', null=True,
+                                    blank=True)
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='products')
     quantity = models.PositiveIntegerField(default=1)
 

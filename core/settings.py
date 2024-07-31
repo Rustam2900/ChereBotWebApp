@@ -24,7 +24,9 @@ INSTALLED_APPS = [
     # apps
     'bot',
     'webapp',
-    'rest_framework'
+    'rest_framework',
+    'drf_yasg'
+
 
 ]
 
@@ -43,7 +45,7 @@ ROOT_URLCONF = 'core.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -111,6 +113,14 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = 'static'
+
+MEDIA_URL = 'media/'
+MEDIA_ROOT = 'media'
+
+LOCALE_PATHS = (
+    BASE_DIR / 'locale',
+)
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
