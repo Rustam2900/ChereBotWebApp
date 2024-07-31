@@ -15,9 +15,9 @@ class ProductAdmin(TranslationAdmin):
 
 @admin.register(CartItem)
 class CartItemAdmin(admin.ModelAdmin):
-    list_display = ('id', 'product', 'quantity', 'total_price')
+    list_display = ('id', 'product', 'quantity')
     search_fields = ('id', 'product', 'quantity')
-    list_filter = ('id', 'product', 'quantity', 'total_price')
+    list_filter = ('id', 'product', 'quantity')
 
 
 @admin.register(Shares)

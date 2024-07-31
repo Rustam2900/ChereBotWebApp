@@ -12,7 +12,7 @@ class BaseModel(models.Model):
 
 class BotUser(BaseModel):
     telegram_id = models.BigIntegerField(unique=True)
-    name = models.CharField(max_length=100)
+    name = models.CharField(_('name'), max_length=100)
     contact = models.CharField(max_length=30)
     add_contact = models.CharField(max_length=30)
 
@@ -20,11 +20,14 @@ class BotUser(BaseModel):
         verbose_name = _('BotUser')
         verbose_name_plural = _('BotUsers')
 
+    def __str__(self):
+        return self.name
+
 
 class BotCompany(BaseModel):
     telegram_id = models.BigIntegerField(unique=True)
-    company_name = models.CharField(max_length=30)
-    company_employee_name = models.CharField(max_length=30)
+    company_name = models.CharField(_('company_name'), max_length=30)
+    company_employee_name = models.CharField(_('company_employee_name'), max_length=30)
     company_contact = models.CharField(max_length=30)
     employee_number = models.IntegerField()
     lifetime = models.IntegerField()

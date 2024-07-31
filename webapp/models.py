@@ -32,8 +32,8 @@ class CartItem(BaseModel):
 
 
 class Shares(BaseModel):
-    title = models.CharField(max_length=100)
-    description = models.TextField()
+    title = models.CharField(_('title'), max_length=100)
+    description = models.TextField(_('description'))
     image = models.ImageField()
     interest = models.CharField(max_length=20, null=True, blank=True)
     price = models.FloatField()

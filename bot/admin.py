@@ -5,8 +5,8 @@ from bot.models import BotUser, BotCompany, BotCompanyOrder
 
 @admin.register(BotUser)
 class BotUserAdmin(TranslationAdmin):
-    list_display = ['id', 'name', 'contact', 'add_contact']
-    search_fields = ['name', 'contact', 'contact']
+    list_display = ['id', 'name', 'contact']
+    search_fields = ['name', 'contact']
 
 
 @admin.register(BotCompany)
@@ -17,5 +17,5 @@ class BotCompanyAdmin(TranslationAdmin):
 
 @admin.register(BotCompanyOrder)
 class BotCompanyOrderAdmin(TranslationAdmin):
-    list_display = ['id', 'product_name', 'quantity', 'total_price', 'create_at']
+    list_display = ['id', 'product_name', 'quantity']
     search_fields = ['id', 'product_name']
