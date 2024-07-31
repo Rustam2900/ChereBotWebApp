@@ -10,7 +10,7 @@ admin.site.register(Banner)
 class ProductAdmin(TranslationAdmin):
     list_display = ('id', 'name', 'image', 'price', 'description')
     search_fields = ('id', 'name')
-    list_filter = ('id', 'name', 'price', 'description')
+    list_filter = ('id', 'name')
 
 
 @admin.register(CartItem)
@@ -23,4 +23,5 @@ class CartItemAdmin(admin.ModelAdmin):
 @admin.register(Shares)
 class SharesAdmin(admin.ModelAdmin):
     list_display = ('id', 'price')
-    search_fields = ('id', )
+    search_fields = ('id',)
+    list_filter = ('id',)

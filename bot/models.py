@@ -34,7 +34,7 @@ class BotCompany(BaseModel):
 
     class Meta:
         verbose_name = _('BotCompany')
-        verbose_name_plural = _('BotCompanies')
+        verbose_name_plural = _('BotCompany')
 
 
 class BotCompanyOrder(BaseModel):
