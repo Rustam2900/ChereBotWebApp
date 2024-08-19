@@ -19,8 +19,8 @@ schema_view = get_schema_view(
 
 urlpatterns = i18n_patterns(
     path('admin/', admin.site.urls),
-    path('api/bot/', include('bot.urls')),
-    path('api/webapp/', include('webapp.urls')),
+    path('bot/', include('bot.urls')),
+    path('webapp/', include('webapp.urls')),
 )
 
 urlpatterns += [

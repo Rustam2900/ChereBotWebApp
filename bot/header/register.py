@@ -186,4 +186,7 @@ async def process_user_add_contact(message: types.Message, state: FSMContext):
 
     await message.answer(f"{result}\n\n{response_message}",
                          reply_markup=main_menu())
+    print("#####################")
+    print(result)
+    print("#####################")
     await state.clear()

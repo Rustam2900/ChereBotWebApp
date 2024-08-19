@@ -1,13 +1,35 @@
 import aiohttp
 import requests
+
 # from aiogram.utils.i18n import gettext as _
 
-BASE_URL = 'http://localhost:9000/bot'
+BASE_URL = 'http://localhost:9000/uz/bot'
+
+
+# async def create_company(telegram_id, company_name, company_employee_name,
+#                          company_contact, employee_number, lifetime):
+#     url = f"{BASE_URL}/botcompany/{telegram_id}"
+#
+#     data = {
+#         'telegram_id': telegram_id,
+#         'company_name': company_name,
+#         'company_employee_name': company_employee_name,
+#         'company_contact': company_contact,
+#         'employee_number': employee_number,
+#         'lifetime': lifetime
+#     }
+#
+#     async with aiohttp.ClientSession() as session:
+#         async with session.post(url=url, json=data) as response:
+#             if response.status == 201:
+#                 return "Foydalanuvchi yaratildi."
+#             else:
+#                 return f"Error: {response.status}"
 
 
 async def create_company(telegram_id, company_name, company_employee_name,
                          company_contact, employee_number, lifetime):
-    url = f"{BASE_URL}/botcompany/{telegram_id}"
+    url = f"{BASE_URL}/botcompany/"
 
     data = {
         'telegram_id': telegram_id,
@@ -21,13 +43,29 @@ async def create_company(telegram_id, company_name, company_employee_name,
     async with aiohttp.ClientSession() as session:
         async with session.post(url=url, json=data) as response:
             if response.status == 201:
-                return "Foydalanuvchi yaratildi."
+                return "Kompaniya yaratildi."
             else:
                 return f"Error: {response.status}"
 
 
+# async def create_user(telegram_id, name, contact, add_contact):
+#     url = f"{BASE_URL}/botuser/{telegram_id}"
+#
+#     data = {
+#         'telegram_id': telegram_id,
+#         'name': name,
+#         'contact': contact,
+#         'add_contact': add_contact
+#     }
+#
+#     async with aiohttp.ClientSession() as session:
+#         async with session.post(url=url, json=data) as response:
+#             if response.status == 201:
+#                 return "Foydalanuvchi yaratildi."
+#             else:
+#                 return f"Error: {response.status}"
 async def create_user(telegram_id, name, contact, add_contact):
-    url = f"{BASE_URL}/botuser/{telegram_id}"
+    url = f"{BASE_URL}/botuser/"
 
     data = {
         'telegram_id': telegram_id,

@@ -7,37 +7,59 @@ from bot.models import BotUser, BotCompany, BotCompanyOrder
 from bot.serializer import BotUserSerializer, BotCompanySerializer, BotCompanyOrderSerializer
 
 
+# class BotCompanyApiView(
+#     mixins.CreateModelMixin,
+#     mixins.RetrieveModelMixin,
+#     generics.GenericAPIView
+# ):
+#     queryset = BotCompany.objects.all()
+#     serializer_class = BotCompanySerializer
+#     lookup_field = 'telegram_id'
+#
+#     def get(self, request, *args, **kwargs):
+#         if 'telegram_id' in kwargs:
+#             return self.retrieve(request, *args, **kwargs)
+#         return self.list(request, *args, **kwargs)
+#
+#     def post(self, request, *args, **kwargs):
+#         return self.create(request, *args, **kwargs)
+
+
 class BotCompanyApiView(
     mixins.CreateModelMixin,
-    mixins.RetrieveModelMixin,
     generics.GenericAPIView
 ):
     queryset = BotCompany.objects.all()
     serializer_class = BotCompanySerializer
-    lookup_field = 'telegram_id'
-
-    def get(self, request, *args, **kwargs):
-        if 'telegram_id' in kwargs:
-            return self.retrieve(request, *args, **kwargs)
-        return self.list(request, *args, **kwargs)
 
     def post(self, request, *args, **kwargs):
         return self.create(request, *args, **kwargs)
 
 
+# class BotUserApiView(
+#     mixins.CreateModelMixin,
+#     mixins.RetrieveModelMixin,
+#     generics.GenericAPIView
+# ):
+#     queryset = BotUser.objects.all()
+#     serializer_class = BotUserSerializer
+#     lookup_field = 'telegram_id'
+#
+#     def get(self, request, *args, **kwargs):
+#         if 'telegram_id' in kwargs:
+#             return self.retrieve(request, *args, **kwargs)
+#         return self.list(request, *args, **kwargs)
+#
+#     def post(self, request, *args, **kwargs):
+#         return self.create(request, *args, **kwargs)
+
+
 class BotUserApiView(
     mixins.CreateModelMixin,
-    mixins.RetrieveModelMixin,
     generics.GenericAPIView
 ):
     queryset = BotUser.objects.all()
     serializer_class = BotUserSerializer
-    lookup_field = 'telegram_id'
-
-    def get(self, request, *args, **kwargs):
-        if 'telegram_id' in kwargs:
-            return self.retrieve(request, *args, **kwargs)
-        return self.list(request, *args, **kwargs)
 
     def post(self, request, *args, **kwargs):
         return self.create(request, *args, **kwargs)
