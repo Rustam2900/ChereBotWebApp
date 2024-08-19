@@ -1,6 +1,8 @@
 import aiohttp
 import requests
-BASE_URL = 'http://localhost:9000/bot/v1'
+# from aiogram.utils.i18n import gettext as _
+
+BASE_URL = 'http://localhost:9000/bot'
 
 
 async def create_company(telegram_id, company_name, company_employee_name,
@@ -21,7 +23,7 @@ async def create_company(telegram_id, company_name, company_employee_name,
             if response.status == 201:
                 return "Foydalanuvchi yaratildi."
             else:
-                return f"Xatolik yuz berdi: {response.status}"
+                return f"Error: {response.status}"
 
 
 async def create_user(telegram_id, name, contact, add_contact):
@@ -39,7 +41,7 @@ async def create_user(telegram_id, name, contact, add_contact):
             if response.status == 201:
                 return "Foydalanuvchi yaratildi."
             else:
-                return f"Xatolik yuz berdi: {response.status}"
+                return f"Error: {response.status}"
 
 
 async def check_user_registration(session, telegram_id):
@@ -58,14 +60,14 @@ async def check_company_registration(session, telegram_id):
         return response.status == 200
 
 
-async def get_operator():
-    url = f"{BASE_URL}/operator"
-    async with aiohttp.ClientSession() as session:
-        async with session.get(url) as response:
-            if response.status == 200:
-                return await response.json()
-            else:
-                return []
+# async def get_operator():
+#     url = f"{BASE_URL}/operator"
+#     async with aiohttp.ClientSession() as session:
+#         async with session.get(url) as response:
+#             if response.status == 200:
+#                 return await response.json()
+#             else:
+#                 return []
 
 
 async def create_order_company(bot_company_id, product_name, amount, latitude, longitude):
@@ -84,12 +86,12 @@ async def create_order_company(bot_company_id, product_name, amount, latitude, l
         async with aiohttp.ClientSession() as session:
             async with session.post(url, headers=headers, json=data) as response:
                 if response.status == 201:
-                    return "Buyurtmangiz muvaffaqiyatli yaratildi!"
+                    return _("Buyurtmangiz muvaffaqiyatli yaratildi!")
                 else:
-                    return f"Buyurtma yaratishda xatolik yuz berdi: {response.status}"
+                    return f"Error: {response.status}"
     except Exception as e:
         print(e)
-        return f"Buyurtma yaratishda xatolik yuz berdi: {str(e)}"
+        return f"Error: {str(e)}"
 
 
 async def create_order_user(bot_user_id, product_name, amount, latitude, longitude):
@@ -111,10 +113,10 @@ async def create_order_user(bot_user_id, product_name, amount, latitude, longitu
                 if response.status == 201:
                     return "Buyurtmangiz muvaffaqiyatli yaratildi!"
                 else:
-                    return f"Buyurtma yaratishda xatolik yuz berdi: {response.status}"
+                    return f"Error: {response.status}"
     except Exception as e:
         print(e)
-        return f"Buyurtma yaratishda xatolik yuz berdi: {str(e)}"
+        return f"Error: {str(e)}"
 
 
 async def fetch_user_orders(telegram_id):

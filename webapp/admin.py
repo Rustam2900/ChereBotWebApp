@@ -3,7 +3,15 @@ from webapp.models import Product, CartItem, Shares, MinAmount, Banner
 from modeltranslation.admin import TranslationAdmin
 
 admin.site.register(MinAmount)
-admin.site.register(Banner)
+
+
+# admin.site.register(Banner)
+
+
+@admin.register(Banner)
+class BannerAdmin(TranslationAdmin):
+    list_display = ('id',)
+    search_fields = ('id',)
 
 
 @admin.register(Product)
@@ -15,9 +23,9 @@ class ProductAdmin(TranslationAdmin):
 
 @admin.register(CartItem)
 class CartItemAdmin(admin.ModelAdmin):
-    list_display = ('id', 'product', 'quantity')
-    search_fields = ('id', 'product', 'quantity')
-    list_filter = ('id', 'product', 'quantity')
+    list_display = ('order_id', 'product', 'quantity')
+    search_fields = ('order_id', 'product__name')  # Agar product name bilan qidirishni istasangiz
+    list_filter = ('product',)  # Filtr faqat mavjud maydonlar uchun ishlatiladi
 
 
 @admin.register(Shares)

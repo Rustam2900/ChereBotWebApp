@@ -1,7 +1,11 @@
 from aiogram.types import KeyboardButton, ReplyKeyboardMarkup, WebAppInfo
 
-from bot.conustant import (ORDERS, MY_ORDERS, OPERATOR, SETTINGS, BACK, LANG_CHANGE, LOCATION, SETTINGS_RU,
+from bot.conustant import (ORDERS, MY_ORDERS, OPERATOR, SETTINGS, WEB_ORDERS,
+                           BACK, LANG_CHANGE, LOCATION,
+                           SETTINGS_RU,
                            OPERATOR_RU, ORDERS_RU, MY_ORDERS_RU, WEB_ORDERS)
+
+# from aiogram.utils.i18n import gettext as _
 
 
 def main_menu():
@@ -65,7 +69,7 @@ def lang_change():
          KeyboardButton(text='🇷🇺'), ]
 
     ]
-    keyboard = ReplyKeyboardMarkup(keyboard=kb, resize_keyboard=True)
+    keyboard = ReplyKeyboardMarkup(keyboard=kb, resize_keyboard=True, one_time_keyboard=True)
     return keyboard
 
 
@@ -107,5 +111,3 @@ def web():
     ]
     keyboard = ReplyKeyboardMarkup(keyboard=kb, resize_keyboard=True)
     return keyboard
-
-

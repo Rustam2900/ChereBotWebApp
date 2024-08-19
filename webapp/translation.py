@@ -10,3 +10,8 @@ class ProductTranslationOptions(TranslationOptions):
 @register(models.Shares)
 class SharesTranslationOptions(TranslationOptions):
     fields = ('title', 'description',)
+
+
+@register(models.Banner)
+class BannerTranslationOptions(TranslationOptions):
+    pass

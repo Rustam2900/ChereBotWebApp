@@ -11,12 +11,20 @@ class BaseModel(models.Model):
 
 
 class BotUser(BaseModel):
+    class Language(models.TextChoices):
+        UZBEK = 'UZ', 'Uzbek'
+        RUSSIAN = 'RU', 'Russian'
+
     telegram_id = models.BigIntegerField(unique=True)
     name = models.CharField(_('name'), max_length=100)
     contact = models.CharField(max_length=30)
     add_contact = models.CharField(max_length=30)
+    language = models.CharField(max_length=2,
+                                choices=Language.choices,
+                                default=Language.UZBEK)
 
     class Meta:
+        ordering = ['-created_at']
         verbose_name = _('BotUser')
         verbose_name_plural = _('BotUsers')
 
@@ -25,14 +33,22 @@ class BotUser(BaseModel):
 
 
 class BotCompany(BaseModel):
+    class Language(models.TextChoices):
+        UZBEK = 'UZ', 'Uzbek'
+        RUSSIAN = 'RU', 'Russian'
+
     telegram_id = models.BigIntegerField(unique=True)
     company_name = models.CharField(_('company_name'), max_length=30)
     company_employee_name = models.CharField(_('company_employee_name'), max_length=30)
     company_contact = models.CharField(max_length=30)
     employee_number = models.IntegerField()
     lifetime = models.IntegerField()
+    language = models.CharField(max_length=2,
+                                choices=Language.choices,
+                                default=Language.UZBEK)
 
     class Meta:
+        ordering = ['-created_at']
         verbose_name = _('BotCompany')
         verbose_name_plural = _('BotCompany')
 
@@ -43,5 +59,6 @@ class BotCompanyOrder(BaseModel):
     quantity = models.IntegerField()
 
     class Meta:
+        ordering = ['-created_at']
         verbose_name = _('BotCompanyOrder')
         verbose_name_plural = _('BotCompanyOrders')

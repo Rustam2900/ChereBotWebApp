@@ -92,14 +92,13 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
 LANGUAGES = (
-    ('en', _('English')),
     ('ru', _('Russion')),
     ('uz', _('Uzbek')),
 
 )
 
 MODELTRANSLATION_DEFAULT_LANGUAGE = 'uz'
-MODELTRANSLATION_LANGUAGES = ('uz', 'en', 'ru')
+MODELTRANSLATION_LANGUAGES = ('uz', 'ru')
 
 LANGUAGE_CODE = 'uz'
 

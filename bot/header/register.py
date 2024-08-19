@@ -2,18 +2,15 @@ import re
 
 from aiogram import Router, types, F
 from aiogram.fsm.state import StatesGroup, State
+
 from aiogram.fsm.context import FSMContext
+from asgiref.sync import sync_to_async
+
 from bot.api import create_company, create_user
-from bot.keyboard.k_button import contact_user, main_menu, person, person_ru
+from bot.filters.states import RegisterFormUser, RegisterForm, RegisterFormUserBot
+from bot.keyboard.k_button import contact_user, main_menu, lang_change, person, person_ru
 
-
-class RegisterForm(StatesGroup):
-    company_name = State()
-    company_employee_name = State()
-    company_contact = State()
-    employee_number = State()
-    lifetime = State()
-
+# from aiogram.utils.i18n import gettext as _
 
 router = Router()
 
@@ -21,6 +18,25 @@ router = Router()
 @router.message(F.text == '🇺🇿')
 async def lang_uz(message: types.Message):
     await message.answer(text='Harakatni tanlang 〽️:', reply_markup=person())
+
+# @router.message(RegisterFormUser.CHOOSE_LANGUAGE,
+#                 lambda message: message.text in ["🇺🇿 UZ", "🇷🇺 RU"])
+# async def process_language(message: types.Message, state: FSMContext):
+#     user_language = 'uz' if message.text == "🇺🇿 UZ" else 'ru'
+#     await state.update_data(language=user_language)
+#     user_data = await state.get_data()
+#     await state.set_state(RegisterFormUser.NAME)
+#     await message.answer(text=' ', reply_markup=person())
+#     await message.answer("yuridik shaxs  jismoniy shaxs?")
+#
+#
+# @router.message(RegisterFormUser.CHOOSE_LANGUAGE,
+#                 lambda message: message.text not in ["🇺🇿 UZ", "🇷🇺 RU"])
+# async def process_language(message: types.Message, state: FSMContext):
+#     await message.answer(
+#         ("Tilni tanlang, Выберите язык"),
+#         reply_markup=lang_change()
+#     )
 
 
 @router.message(F.text == '🇷🇺')
@@ -95,12 +111,18 @@ async def process_lifetime(message: types.Message, state: FSMContext):
         lifetime=data['lifetime']
 
     )
-    result = (f"Kompaniya nomi: {data['company_name']}\n\n"
-              f"Xodimlar soni: {data['employee_number']}\n\n"
-              f"Davomiylik: {data['lifetime']} kun\n\n"
-              f"Kompaniya xodimining ismi: {data['company_employee_name']}\n\n"
-              f"Kontakt ma'lumotlari: {data['company_contact']}",
-              "sizga maslahat bergan suvimiz")
+    text_1 = 'Kompaniya nomi:'
+    text_2 = 'Xodimlar soni:'
+    text_3 = 'Davomiylik:'
+    text_4 = 'Kompaniya xodimining ismi:'
+    text_5 = "Kontakt ma'lumotlari:"
+    text_6 = "sizga maslahat bergan suvimiz:"
+    result = (f"{text_1} {data['company_name']}\n\n"
+              f"{text_2} {data['employee_number']}\n\n"
+              f"{text_3} {data['lifetime']} kun\n\n"
+              f"{text_4} {data['company_employee_name']}\n\n"
+              f"{text_5} {data['company_contact']}",
+              {text_6})
 
     await message.answer(f"{result}\n\n{response_message}",
                          reply_markup=main_menu())
@@ -108,41 +130,35 @@ async def process_lifetime(message: types.Message, state: FSMContext):
     await state.clear()
 
 
-class RegisterFormUser(StatesGroup):
-    name = State()
-    contact = State()
-    add_contact = State()
-
-
 @router.message(F.text == 'jismoniy shaxs')
 async def physical_person(message: types.Message, state: FSMContext):
-    await state.set_state(RegisterFormUser.name)
+    await state.set_state(RegisterFormUserBot.name)
     await message.answer(text="Ismingizni kiriting:")
 
 
 @router.message(F.text == 'юридическое лицо')
 async def physical_person(message: types.Message, state: FSMContext):
-    await state.set_state(RegisterFormUser.name)
+    await state.set_state(RegisterFormUserBot.name)
     await message.answer(text="Введите ваше имя:")
 
 
-@router.message(RegisterFormUser.name)
+@router.message(RegisterFormUserBot.name)
 async def process_user_name(message: types.Message, state: FSMContext):
     await state.update_data(name=message.text)
-    await state.set_state(RegisterFormUser.contact)
+    await state.set_state(RegisterFormUserBot.contact)
     await message.answer(text="Kontakt ma'lumotlarini kiriting:", reply_markup=contact_user())
 
 
-@router.message(RegisterFormUser.contact)
+@router.message(RegisterFormUserBot.contact)
 async def process_user_contact(message: types.Message, state: FSMContext):
     contact = message.contact.phone_number
     await state.update_data(contact=contact)
-    await state.set_state(RegisterFormUser.add_contact)
+    await state.set_state(RegisterFormUserBot.add_contact)
     await message.answer(text="Qo'shimcha kontakt ma'lumotlarini kiriting:\n\n"
                               "+998 (93) 068 29 11")
 
 
-@router.message(RegisterFormUser.add_contact)
+@router.message(RegisterFormUserBot.add_contact)
 async def process_user_add_contact(message: types.Message, state: FSMContext):
     add_contact = message.text
 
@@ -163,12 +179,11 @@ async def process_user_add_contact(message: types.Message, state: FSMContext):
         contact=user_data['contact'],
         add_contact=user_data['add_contact']
     )
+
     result = (f"ismiz: {user_data['name']} \n\n"
               f"contact: {user_data['contact']} \n\n"
-              f"qo'shimcha contact {user_data['add_contact']}")
+              f"qo'shimcha contact: {user_data['add_contact']}")
 
     await message.answer(f"{result}\n\n{response_message}",
                          reply_markup=main_menu())
     await state.clear()
-
-

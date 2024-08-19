@@ -1,0 +1,5 @@
+msgid "Welcome!"
+msgstr "Xush kelibsiz!"
+
+msgid "Language set."
+msgstr "Til o'rnatildi."

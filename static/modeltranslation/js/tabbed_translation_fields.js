@@ -166,17 +166,17 @@ var google, django, gettext;
          *
          * {
          *     'id_name_de': {
-         *         'en': HTMLInputElement,
+         *         'ru': HTMLInputElement,
          *         'de': HTMLInputElement,
          *         'zh_tw': HTMLInputElement
          *     },
          *     'id_name_set-2-name': {
-         *         'en': HTMLTextAreaElement,
+         *         'ru': HTMLTextAreaElement,
          *         'de': HTMLTextAreaElement,
          *         'zh_tw': HTMLTextAreaElement
          *     },
          *     'id_news-data2-content_type-object_id-0-name': {
-         *         'en': HTMLTextAreaElement,
+         *         'ru': HTMLTextAreaElement,
          *         'de': HTMLTextAreaElement,
          *         'zh_tw': HTMLTextAreaElement
          *     }

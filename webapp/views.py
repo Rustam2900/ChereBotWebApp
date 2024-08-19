@@ -15,6 +15,13 @@ class CartItemListCreateView(generics.ListCreateAPIView):
     queryset = CartItem.objects.all()
     serializer_class = CartItemSerializer
 
+    def order_detail(request, some_id):
+        order = CartItem.objects.get(id=some_id)
+        context = {
+            'order_id': order.order_id,
+        }
+        return render(request, context)
+
 
 class SharesListCreateView(generics.ListAPIView):
     queryset = Shares.objects.all()

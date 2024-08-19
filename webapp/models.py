@@ -1,6 +1,9 @@
+import uuid
 from django.db import models
-from bot.models import BaseModel, BotCompany, BotUser
 from django.utils.translation import gettext_lazy as _
+from django.core.exceptions import ValidationError
+
+from bot.models import BaseModel, BotCompany, BotUser
 
 
 class Product(BaseModel):
@@ -14,6 +17,7 @@ class Product(BaseModel):
     chlorides = models.IntegerField()
 
     class Meta:
+        ordering = ['-created_at']
         verbose_name = _('Product')
         verbose_name_plural = _('Product')
 
@@ -22,6 +26,7 @@ class Product(BaseModel):
 
 
 class CartItem(BaseModel):
+    order_id = models.UUIDField(default=uuid.uuid4, editable=False, unique=True, primary_key=True)
     bot_company_id = models.ForeignKey(BotCompany, on_delete=models.CASCADE, related_name='company_order', null=True,
                                        blank=True)
     bot_user_id = models.ForeignKey(BotUser, on_delete=models.CASCADE, related_name='company_order', null=True,
@@ -29,8 +34,20 @@ class CartItem(BaseModel):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='products')
     quantity = models.PositiveIntegerField(default=1)
 
+
     def total_price(self):
         return self.quantity * self.product.price
+
+    def clean(self):
+        if not self.bot_company_id and not self.bot_user_id:
+            raise ValidationError('Either bot_company_id or bot_user_id must be set.')
+        if self.bot_company_id and self.bot_user_id:
+            raise ValidationError('Only one of bot_company_id or bot_user_id must be set.')
+
+    class Meta:
+        ordering = ['-created_at']
+
+
 
 
 class Shares(BaseModel):
@@ -41,6 +58,7 @@ class Shares(BaseModel):
     price = models.FloatField()
 
     class Meta:
+        ordering = ['-created_at']
         verbose_name = _('Shares')
         verbose_name_plural = _('Shares')
 
@@ -62,3 +80,4 @@ class MinAmount(models.Model):
     class Meta:
         verbose_name = _('Minimum amount')
         verbose_name_plural = _('Minimum amounts')
+
