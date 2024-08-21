@@ -89,8 +89,8 @@ class BotCompany(BaseModel):
 
 
 class BotCompanyOrder(BaseModel):
-    bot_company_id = models.ForeignKey(BotCompany, on_delete=models.CASCADE, related_name='order_company')
-    product_name = models.CharField(_("product_name"), max_length=30)
+    bot_company_id = models.ForeignKey('BotCompany', on_delete=models.CASCADE, related_name='orders')
+    product_name = models.CharField(_("product_name"), max_length=30, default="20 L")
     quantity = models.IntegerField()
 
     class Meta:

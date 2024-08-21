@@ -17,5 +17,5 @@ class BotCompanyAdmin(TranslationAdmin):
 
 @admin.register(BotCompanyOrder)
 class BotCompanyOrderAdmin(TranslationAdmin):
-    list_display = ['id', 'product_name', 'quantity']
+    list_display = ['id', 'product_name', 'quantity', 'created_at']
     search_fields = ['id', 'product_name']

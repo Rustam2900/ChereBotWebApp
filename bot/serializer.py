@@ -38,8 +38,4 @@ class BotCompanySerializer(serializers.ModelSerializer):
 class BotCompanyOrderSerializer(serializers.ModelSerializer):
     class Meta:
         model = BotCompanyOrder
-        fields = [
-            'bot_company_id',
-            'product_name',
-            'quantity'
-        ]
+        fields = ['bot_company_id', 'product_name', 'quantity']

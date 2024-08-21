@@ -1,9 +1,9 @@
 from django.urls import path
 from bot.views import (BotUserApiView,
-                       OrderCompanyApiView, BotCompanyApiView)
+                       BotCompanyApiView, BotCompanyOrderCreateView)
 
 urlpatterns = [
-    path('botcompany/<int:telegram_id>', BotCompanyApiView.as_view()),
+    path('botcompany/', BotCompanyApiView.as_view()),
     path('botuser/', BotUserApiView.as_view()),
-    path('order-company/<int:telegram_id>', OrderCompanyApiView.as_view()),
+    path('order-company/<int:bot_company_id>/', BotCompanyOrderCreateView.as_view(), name='order-company-create'),
 ]

@@ -108,28 +108,28 @@ async def check_company_registration(session, telegram_id):
 #                 return []
 
 
-async def create_order_company(bot_company_id, product_name, amount, latitude, longitude):
-    url = f"{BASE_URL}/order-company/{int(bot_company_id)}"
-    headers = {
-        'Content-Type': 'application/json'
-    }
-    data = {
-        "bot_company_id": bot_company_id,
-        "product_name": product_name,
-        "amount": amount,
-        "latitude": latitude,
-        "longitude": longitude
-    }
-    try:
-        async with aiohttp.ClientSession() as session:
-            async with session.post(url, headers=headers, json=data) as response:
-                if response.status == 201:
-                    return _("Buyurtmangiz muvaffaqiyatli yaratildi!")
-                else:
-                    return f"Error: {response.status}"
-    except Exception as e:
-        print(e)
-        return f"Error: {str(e)}"
+# async def create_order_company(bot_company_id, product_name, amount, latitude, longitude):
+#     url = f"{BASE_URL}/order-company/{int(bot_company_id)}"
+#     headers = {
+#         'Content-Type': 'application/json'
+#     }
+#     data = {
+#         "bot_company_id": bot_company_id,
+#         "product_name": product_name,
+#         "amount": amount,
+#         "latitude": latitude,
+#         "longitude": longitude
+#     }
+#     try:
+#         async with aiohttp.ClientSession() as session:
+#             async with session.post(url, headers=headers, json=data) as response:
+#                 if response.status == 201:
+#                     return "Buyurtmangiz muvaffaqiyatli yaratildi!"
+#                 else:
+#                     return f"Error: {response.status}"
+#     except Exception as e:
+#         print(e)
+#         return f"Error: {str(e)}"
 
 
 async def create_order_user(bot_user_id, product_name, amount, latitude, longitude):
