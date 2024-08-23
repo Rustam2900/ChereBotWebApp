@@ -1,10 +1,8 @@
-from django.shortcuts import render
 from rest_framework import mixins, generics, status
-from rest_framework.exceptions import ValidationError
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from bot.models import BotUser, BotCompany, BotCompanyOrder
+from bot.models import BotUser, BotCompany
 from bot.serializer import BotUserSerializer, BotCompanySerializer, BotCompanyOrderSerializer
 
 

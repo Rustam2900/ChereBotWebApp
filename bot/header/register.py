@@ -168,27 +168,6 @@ async def process_order_or_cancel(callback_query: types.CallbackQuery, state: FS
     await callback_query.answer()
 
 
-async def create_order_company(bot_company_id, product_name, quantity):
-    url = f"{BASE_URL}/order-company/{int(bot_company_id)}"
-    headers = {
-        'Content-Type': 'application/json'
-    }
-    data = {
-        "product_name": product_name,
-        "quantity": quantity
-    }
-    try:
-        async with aiohttp.ClientSession() as session:
-            async with session.post(url, headers=headers, json=data) as response:
-                if response.status == 201:
-                    return "Buyurtmangiz muvaffaqiyatli yaratildi!"
-                else:
-                    return f"Error: {response.status}"
-    except Exception as e:
-        print(e)
-        return f"Error: {str(e)}"
-
-
 @router.message(F.text == 'jismoniy shaxs')
 async def physical_person(message: types.Message, state: FSMContext):
     await state.set_state(RegisterFormUserBot.name)

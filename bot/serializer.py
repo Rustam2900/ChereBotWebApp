@@ -3,14 +3,6 @@ from rest_framework import serializers
 from bot.models import BotUser, BotCompany, BotCompanyOrder
 
 
-# class BotUserSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = BotUser
-#         fields = [
-#             'name',
-#             'contact',
-#             'add_contact'
-#         ]
 class BotUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = BotUser
